@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <script src="index.js" defer type="module"></script>
+    <link rel="stylesheet" href="src/styles/global.css" />
+    <link rel="stylesheet" href="src/styles/canvas.css" />
+    <link rel="stylesheet" href="src/styles/header.css" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <div id="header" class="p-8 flex justify-between items-center">
+        <p>Snake game</p>
+        <a title="Snake game - GitHub" href="https://github.com/andresfigueira/snake-game-vanilla-js" target="_blank">
+          <img alt="GitHub" style="max-height: 24px;" src="assets/images/github.png"></img>
+        </a>
+      </div>
+      <div class="p-8 flex flex-col items-center">
+        <div id="score" class="mb-8 text-white"></div>
+        <canvas id="canvas" class="mb-8"></canvas>
+        <div id="settings" class="text-white"></div>
+      </div>
+    </div>
+  </body>
+</html>

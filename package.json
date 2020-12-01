@@ -1,0 +1,11 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "Snake game in VanillaJS",
+  "main": "index.html",
+  "scripts": {
+    
+  },
+  "author": "andresfigueira",
+  "license": "MIT"
+}

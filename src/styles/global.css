@@ -1,0 +1,12 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: monospace;
+    text-transform: uppercase;
+}
+
+body {
+    background-color: #05172A;
+    max-height: 100vh;
+}
