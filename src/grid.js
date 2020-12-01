@@ -1,4 +1,4 @@
-import { BOARD_SIZE, BOX, ctx } from './settings.js';
+import { BOARD_SIZE, BOX, ctx, END_BOARD, START_BOARD } from './settings.js';
 
 export function drawRect(x, y, color, w = BOX, h = BOX) {
     ctx.fillStyle = color;
@@ -21,17 +21,17 @@ export function isOutsideGrid(pos) {
 }
 
 export function isOutsideLeft(pos) {
-    return pos.x < 0;
+    return pos.x < START_BOARD;
 }
 
 export function isOutsideRight(pos) {
-    return pos.x > BOARD_SIZE - BOX;
+    return pos.x > END_BOARD;
 }
 
 export function isOutsideUp(pos) {
-    return pos.y < 0;
+    return pos.y < START_BOARD;
 }
 
 export function isOutsideDown(pos) {
-    return pos.y > BOARD_SIZE - BOX;
+    return pos.y > END_BOARD;
 }
