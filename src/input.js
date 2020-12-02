@@ -1,15 +1,21 @@
+import { snake } from './app.js';
+
 const INITIAL_INPUT_DIRECTION = { x: 0, y: 0 };
 
 export const UP_KEY = 'ArrowUp';
 export const DOWN_KEY = 'ArrowDown';
 export const LEFT_KEY = 'ArrowLeft';
 export const RIGHT_KEY = 'ArrowRight';
+export const ALL_KEYS = [UP_KEY, DOWN_KEY, LEFT_KEY, RIGHT_KEY];
 
 export function Input() {
     this.direction = { ...INITIAL_INPUT_DIRECTION };
 
     this.addListener = () => {
         document.addEventListener('keydown', ({ key }) => {
+            // if (key === ' ') {
+            //     snake.slow = !snake.slow;
+            // }
             this.setDirectionByKey(key);
         });
     }

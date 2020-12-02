@@ -2,10 +2,11 @@
   "name": "snake-game",
   "version": "1.0.0",
   "description": "Snake game in VanillaJS",
-  "main": "index.html",
-  "scripts": {
-    
-  },
+  "main": "index.js",
+  "scripts": {},
   "author": "andresfigueira",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
 }

@@ -1,5 +1,6 @@
-import { grid, input } from './app.js';
-import { ctx, BOX, canvas, BOARD_SIZE, INITIAL_EXPANSION_RATE, INITIAL_SNAKE_SPEED_INCREMENT, INITIAL_SNAKE_SPEED, MAX_SNAKE_SPEED, CAN_GO_THROUGH_WALLS, END_BOARD, START_BOARD, SNAKE_COLOR } from './settings.js';
+import { food, grid, input } from './app.js';
+import { ALL_KEYS, DOWN_KEY, LEFT_KEY, RIGHT_KEY, UP_KEY } from './input.js';
+import { ctx, BOX, canvas, BOARD_SIZE, INITIAL_EXPANSION_RATE, INITIAL_SNAKE_SPEED_INCREMENT, INITIAL_SNAKE_SPEED, MAX_SNAKE_SPEED, END_BOARD, START_BOARD, SNAKE_COLOR, INMORTAL } from './settings.js';
 
 export function Snake() {
     this.INITIAL_SNAKE_POSITION = {
@@ -10,12 +11,46 @@ export function Snake() {
     this.snakeBody = [{ ...this.INITIAL_SNAKE_POSITION }];
     this.newSegments = 0;
     this.speed = INITIAL_SNAKE_SPEED;
+    this.maxSpeed = MAX_SNAKE_SPEED;
+    this.prevPositions = [];
+    this.nextPosition = null;
+    this.currentPosition = this.snakeBody[0];
+    this.slow = false;
 
     this.update = function () {
         const { x, y } = input.getDirection();
         if (x === 0 && y === 0) { return; }
         this.addSegments();
         this.move({ x, y });
+    }
+
+    this.getNextBestPosition = (badKeys = [], blocked = false) => {
+        function getRandomKey() {
+            return ALL_KEYS.filter(k => !badKeys.includes(k))[0] || null;
+        }
+
+        const { x, y } = this.currentPosition;
+        const foodPos = food.getFood();
+        let key = null;
+        const nextPossible = {
+            [UP_KEY]: { ...this.currentPosition, y: y - BOX },
+            [DOWN_KEY]: { ...this.currentPosition, y: y + BOX },
+            [LEFT_KEY]: { ...this.currentPosition, x: x - BOX },
+            [RIGHT_KEY]: { ...this.currentPosition, x: x + BOX },
+            current: { ...this.currentPosition },
+        }
+
+        if (foodPos.y < y && (blocked || !badKeys.includes(UP_KEY))) { key = UP_KEY; }
+        if (foodPos.y > y && (blocked || !badKeys.includes(DOWN_KEY))) { key = DOWN_KEY; }
+        if (foodPos.x < x && (blocked || !badKeys.includes(LEFT_KEY))) { key = LEFT_KEY; }
+        if (foodPos.x > x && (blocked || !badKeys.includes(RIGHT_KEY))) { key = RIGHT_KEY; }
+        if (!key) { key = getRandomKey(); }
+
+        if (this.isDead(nextPossible[key])) {
+            return this.getNextBestPosition([...badKeys, key], !key);
+        }
+
+        return key;
     }
 
     this.move = function ({ x, y }) {
@@ -34,8 +69,11 @@ export function Snake() {
             nextPos.y = START_BOARD;
         }
 
+        this.prevPositions.push(this.currentPosition);
+        this.currentPosition = nextPos;
         this.snakeBody.pop();
         this.snakeBody.unshift(nextPos);
+
     }
 
     this.draw = function () {
@@ -62,15 +100,16 @@ export function Snake() {
         this.newSegments += value;
     }
 
-    this.isDead = function () {
+    this.isDead = function (position = this.getHead()) {
+        if (INMORTAL) { return false; }
         return (
-            (!CAN_GO_THROUGH_WALLS && grid.isOutside(this.getHead())) ||
-            this.isIntesection()
+            (!grid.canGoThroughWalls && grid.isOutside(position)) ||
+            this.isIntersection(position)
         );
     }
 
-    this.isIntesection = function () {
-        return this.onSnake(this.getHead(), { ignoreHead: true });
+    this.isIntersection = function (position = this.getHead()) {
+        return this.onSnake(position, { ignoreHead: true });
     }
 
     this.resetPosition = function () {
@@ -86,7 +125,7 @@ export function Snake() {
     }
 
     this.addSpeed = function (value = INITIAL_SNAKE_SPEED_INCREMENT) {
-        if (this.speed >= MAX_SNAKE_SPEED) { return; }
+        if (this.speed >= this.maxSpeed) { return; }
         this.speed += value;
     }
 
@@ -95,7 +134,7 @@ export function Snake() {
     }
 
     this.getSpeed = function () {
-        return this.speed;
+        return this.slow ? 0.5 : this.speed;
     }
 
     this.equalPositions = function (a, b) {

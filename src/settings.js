@@ -1,5 +1,5 @@
 // Settings
-export const BOX = 30;
+export const BOX = 20;
 export const canvas = document.getElementById('canvas');
 export const ctx = canvas?.getContext('2d') || null;
 
@@ -14,6 +14,7 @@ export const SNAKE_COLOR = '#0B9ABD';
 export const INITIAL_SNAKE_SPEED = 5;
 export const INITIAL_SNAKE_SPEED_INCREMENT = 0.25;
 export const MAX_SNAKE_SPEED = 20;
+export const INMORTAL = false;
 
 // Food
 export const FOOD_COLOR = '#D01F21';

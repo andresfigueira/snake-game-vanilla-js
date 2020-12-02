@@ -43,20 +43,7 @@ export function Game() {
     }
 
     this.autoplayAi = function () {
-        const snakePos = snake.getHead();
-        const foodPos = food.getFood();
-        let aiKey = null;
-
-        if (foodPos.x < snakePos.x) {
-            aiKey = LEFT_KEY;
-        } else if (foodPos.x > snakePos.x) {
-            aiKey = RIGHT_KEY;
-        } else if (foodPos.y < snakePos.y) {
-            aiKey = UP_KEY;
-        } else if (foodPos.y > snakePos.y) {
-            aiKey = DOWN_KEY;
-        }
-
+        const aiKey = snake.getNextBestPosition();
         input.setDirectionByKey(aiKey);
     }
 
