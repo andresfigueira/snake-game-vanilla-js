@@ -1,7 +1,11 @@
-import { BOARD_SIZE, BOX, CAN_GO_THROUGH_WALLS, ctx, END_BOARD, START_BOARD } from './settings.js';
+import { BOARD_SIZE, BOX, CROSS_WALLS, ctx, END_BOARD, START_BOARD } from './settings.js';
 
 export function Grid() {
-    this.canGoThroughWalls = CAN_GO_THROUGH_WALLS;
+    this.crossWalls = CROSS_WALLS;
+
+    this.setCrossWalls = function (crossWalls) {
+        this.crossWalls = crossWalls;
+    }
 
     this.drawRect = (x, y, color, w = BOX, h = BOX) => {
         ctx.fillStyle = color;

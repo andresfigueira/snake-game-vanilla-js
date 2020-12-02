@@ -22,9 +22,18 @@
         </a>
       </div>
       <div class="p-8 flex flex-col items-center">
-        <div id="score" class="mb-8 text-white"></div>
+        <div class="flex flex-row justify-between" style="width: 600px;">
+          <div id="score" class="mb-8"></div>
+          <div class="flex flex-col">
+            <label class="flex items-center" id="active-ai-container"></label>
+            <label class="flex items-center" id="cross-walls-container"></label>
+            <label class="flex items-center" id="immortal-container"></label>
+          </div>
+        </div>
         <canvas id="canvas" class="mb-8"></canvas>
-        <div id="settings" class="text-white"></div>
+        <div id="speed-slider-container" class="flex justify-center">
+        </div>
+        <div id="settings"></div>
       </div>
     </div>
   </body>

@@ -16,7 +16,6 @@ export function Food() {
     this.update = function () {
         if (!snake.onSnake(this.food)) { return; }
         score.add();
-        snake.addSpeed();
         snake.expand();
         this.setRandomPosition();
     }

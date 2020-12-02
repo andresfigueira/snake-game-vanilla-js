@@ -13,9 +13,6 @@ export function Input() {
 
     this.addListener = () => {
         document.addEventListener('keydown', ({ key }) => {
-            // if (key === ' ') {
-            //     snake.slow = !snake.slow;
-            // }
             this.setDirectionByKey(key);
         });
     }

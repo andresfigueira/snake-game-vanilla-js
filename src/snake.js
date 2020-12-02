@@ -1,6 +1,6 @@
-import { food, grid, input } from './app.js';
+import { food, game, grid, input } from './app.js';
 import { ALL_KEYS, DOWN_KEY, LEFT_KEY, RIGHT_KEY, UP_KEY } from './input.js';
-import { ctx, BOX, canvas, BOARD_SIZE, INITIAL_EXPANSION_RATE, INITIAL_SNAKE_SPEED_INCREMENT, INITIAL_SNAKE_SPEED, MAX_SNAKE_SPEED, END_BOARD, START_BOARD, SNAKE_COLOR, INMORTAL } from './settings.js';
+import { ctx, BOX, canvas, BOARD_SIZE, INITIAL_EXPANSION_RATE, INITIAL_SNAKE_SPEED_INCREMENT, INITIAL_SNAKE_SPEED, MAX_SNAKE_SPEED, END_BOARD, START_BOARD, SNAKE_COLOR, IMMORTAL } from './settings.js';
 
 export function Snake() {
     this.INITIAL_SNAKE_POSITION = {
@@ -25,10 +25,7 @@ export function Snake() {
     }
 
     this.getNextBestPosition = (badKeys = [], blocked = false) => {
-        function getRandomKey() {
-            return ALL_KEYS.filter(k => !badKeys.includes(k))[0] || null;
-        }
-
+        const getRandomKey = () => ALL_KEYS.filter(k => !badKeys.includes(k))[0] || null;
         const { x, y } = this.currentPosition;
         const foodPos = food.getFood();
         let key = null;
@@ -46,6 +43,7 @@ export function Snake() {
         if (foodPos.x > x && (blocked || !badKeys.includes(RIGHT_KEY))) { key = RIGHT_KEY; }
         if (!key) { key = getRandomKey(); }
 
+        // TODO: Change it to while instead of recursive
         if (this.isDead(nextPossible[key])) {
             return this.getNextBestPosition([...badKeys, key], !key);
         }
@@ -59,15 +57,10 @@ export function Snake() {
             y: this.snakeBody[0].y + y * BOX
         };
 
-        if (grid.isOutsideRight(nextPos)) {
-            nextPos.x = START_BOARD;
-        } else if (grid.isOutsideLeft(nextPos)) {
-            nextPos.x = END_BOARD;
-        } else if (grid.isOutsideUp(nextPos)) {
-            nextPos.y = END_BOARD;
-        } else if (grid.isOutsideDown(nextPos)) {
-            nextPos.y = START_BOARD;
-        }
+        if (grid.crossWalls && grid.isOutsideRight(nextPos)) { nextPos.x = START_BOARD }
+        if (grid.crossWalls && grid.isOutsideLeft(nextPos)) { nextPos.x = END_BOARD; }
+        if (grid.crossWalls && grid.isOutsideUp(nextPos)) { nextPos.y = END_BOARD; }
+        if (grid.crossWalls && grid.isOutsideDown(nextPos)) { nextPos.y = START_BOARD; }
 
         this.prevPositions.push(this.currentPosition);
         this.currentPosition = nextPos;
@@ -86,7 +79,6 @@ export function Snake() {
 
     this.reset = function () {
         this.resetPosition();
-        this.resetSpeed();
     }
 
     this.onSnake = function (position, { ignoreHead = false } = {}) {
@@ -101,9 +93,9 @@ export function Snake() {
     }
 
     this.isDead = function (position = this.getHead()) {
-        if (INMORTAL) { return false; }
+        if (game.immortal) { return false; }
         return (
-            (!grid.canGoThroughWalls && grid.isOutside(position)) ||
+            (!grid.crossWalls && grid.isOutside(position)) ||
             this.isIntersection(position)
         );
     }
@@ -131,6 +123,10 @@ export function Snake() {
 
     this.resetSpeed = function () {
         this.speed = INITIAL_SNAKE_SPEED;
+    }
+
+    this.setSpeed = function (speed) {
+        this.speed = speed;
     }
 
     this.getSpeed = function () {

@@ -1,5 +1,5 @@
 // Settings
-export const BOX = 20;
+export const BOX = 10;
 export const canvas = document.getElementById('canvas');
 export const ctx = canvas?.getContext('2d') || null;
 
@@ -7,14 +7,17 @@ export const ctx = canvas?.getContext('2d') || null;
 export const BOARD_SIZE = 600;
 export const START_BOARD = 0;
 export const END_BOARD = BOARD_SIZE - BOX;
-export const CAN_GO_THROUGH_WALLS = true;
+export const CROSS_WALLS = false;
 
 // Snake
 export const SNAKE_COLOR = '#0B9ABD';
-export const INITIAL_SNAKE_SPEED = 5;
+export const INITIAL_SNAKE_SPEED = 20;
 export const INITIAL_SNAKE_SPEED_INCREMENT = 0.25;
 export const MAX_SNAKE_SPEED = 20;
-export const INMORTAL = false;
+
+// Game
+export const IMMORTAL = false;
+export const PLAY_AI = true;
 
 // Food
 export const FOOD_COLOR = '#D01F21';

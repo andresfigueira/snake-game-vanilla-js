@@ -1,4 +1,4 @@
-import { canvas, BOARD_SIZE, ctx } from './settings.js';
+import { canvas, BOARD_SIZE, ctx, IMMORTAL, PLAY_AI } from './settings.js';
 import { setAttributes } from './utils/HTMLElement.utils.js';
 import { dom, food, input, score, snake } from './app.js';
 import { DOWN_KEY, LEFT_KEY, RIGHT_KEY, UP_KEY } from './input.js';
@@ -6,11 +6,13 @@ import { DOWN_KEY, LEFT_KEY, RIGHT_KEY, UP_KEY } from './input.js';
 export function Game() {
     this.gameOver = false;
     this.requestLoopId = null;
-    this.playAI = false;
+    this.playAi = PLAY_AI;
+    this.immortal = IMMORTAL;
     this.lastRenderTime = 0;
 
     this.init = () => {
         input.addListener();
+        dom.init();
         this.drawBoard();
         this.loop();
     }
@@ -32,7 +34,7 @@ export function Game() {
     }
 
     this.update = function () {
-        if (this.playAI) { this.autoplayAi(); }
+        if (this.playAi) { this.autoPlayAi(); }
         snake.update();
         food.update();
     }
@@ -42,7 +44,7 @@ export function Game() {
         food.draw();
     }
 
-    this.autoplayAi = function () {
+    this.autoPlayAi = function () {
         const aiKey = snake.getNextBestPosition();
         input.setDirectionByKey(aiKey);
     }
@@ -79,5 +81,13 @@ export function Game() {
             width: BOARD_SIZE,
             height: BOARD_SIZE,
         });
+    }
+
+    this.setPlayAi = function (playAi) {
+        this.playAi = playAi;
+    }
+
+    this.setImmortal = function (immortal) {
+        this.immortal = immortal;
     }
 }
