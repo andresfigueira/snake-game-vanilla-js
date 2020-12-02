@@ -1,7 +1,6 @@
 import { canvas, BOARD_SIZE, ctx, IMMORTAL, PLAY_AI } from './settings.js';
 import { setAttributes } from './utils/HTMLElement.utils.js';
 import { dom, food, input, score, snake } from './app.js';
-import { DOWN_KEY, LEFT_KEY, RIGHT_KEY, UP_KEY } from './input.js';
 
 export function Game() {
     this.gameOver = false;

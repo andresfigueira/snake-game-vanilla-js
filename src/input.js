@@ -1,5 +1,3 @@
-import { snake } from './app.js';
-
 const INITIAL_INPUT_DIRECTION = { x: 0, y: 0 };
 
 export const UP_KEY = 'ArrowUp';
