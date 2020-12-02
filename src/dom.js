@@ -75,7 +75,7 @@ export function Dom() {
             step: "1",
             value: snake.getSpeed(),
             min: "1",
-            max: "500",
+            max: snake.maxSpeed,
         });
         input.oninput = onChange;
 
