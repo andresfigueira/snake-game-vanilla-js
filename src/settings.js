@@ -1,4 +1,3 @@
-
 // Settings
 export const BOX = 30;
 export const canvas = document.getElementById('canvas');

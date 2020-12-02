@@ -1,14 +1,21 @@
 const INITIAL_INPUT_DIRECTION = { x: 0, y: 0 };
-let inputDirection = { ...INITIAL_INPUT_DIRECTION };
 
-const UP_KEY = 'ArrowUp';
-const DOWN_KEY = 'ArrowDown';
-const LEFT_KEY = 'ArrowLeft';
-const RIGHT_KEY = 'ArrowRight';
+export const UP_KEY = 'ArrowUp';
+export const DOWN_KEY = 'ArrowDown';
+export const LEFT_KEY = 'ArrowLeft';
+export const RIGHT_KEY = 'ArrowRight';
 
-export function addInputListener() {
-    document.addEventListener('keydown', ({ key }) => {
-        let { x, y } = { ...inputDirection };
+export function Input() {
+    this.direction = { ...INITIAL_INPUT_DIRECTION };
+
+    this.addListener = () => {
+        document.addEventListener('keydown', ({ key }) => {
+            this.setDirectionByKey(key);
+        });
+    }
+
+    this.setDirectionByKey = (key) => {
+        let { x, y } = { ...this.getDirection() };
         const isUpOrDown = y === -1 || y === 1;
         const isLeftOrRight = x === -1 || x === 1;
 
@@ -17,14 +24,19 @@ export function addInputListener() {
         if (RIGHT_KEY === key && !isLeftOrRight) { x = 1; y = 0; }
         if (LEFT_KEY === key && !isLeftOrRight) { x = -1; y = 0; }
 
-        inputDirection = { x, y };
-    });
+        this.setDirection({ x, y });
+    }
+
+    this.setDirection = (direction) => {
+        this.direction = direction;
+    }
+
+    this.getDirection = () => {
+        return this.direction;
+    }
+
+    this.resetDirection = () => {
+        this.direction = { ...INITIAL_INPUT_DIRECTION };
+    }
 }
 
-export function getInputDirection() {
-    return inputDirection;
-}
-
-export function resetInputDirection() {
-    inputDirection = { ...INITIAL_INPUT_DIRECTION };
-}

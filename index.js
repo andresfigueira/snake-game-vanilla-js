@@ -1,7 +1,4 @@
-import { init } from './src/game.js';
-import { canvas } from './src/settings.js';
+import { App } from './src/app.js';
 
-(function setup() {
-    if (!canvas?.getContext) { return alert('Unsupported'); } // !!! Unsupported
-    init();
-})();
+const app = new App();
+app.run();
