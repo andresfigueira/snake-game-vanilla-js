@@ -1,6 +1,6 @@
 # Snake AI game - VanillaJS
 
-[Live demo](https://epic-johnson-69f819.netlify.app/)
+[Live demo](http://snake.andresfigueira.com/)
 
 #### Just to practice game development and AI
 
