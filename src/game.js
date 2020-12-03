@@ -1,7 +1,6 @@
 import { canvas, BOARD_SIZE, ctx, IMMORTAL, PLAY_AI } from './settings.js';
 import { setAttributes } from './utils/HTMLElement.utils.js';
-import { dom, food, input, score, snake } from './app.js';
-import { SPACE_KEY } from './input.js';
+import { dom, food, GA, game, grid, input, score, snake } from './app.js';
 
 export function Game() {
     this.gameOver = false;
@@ -73,6 +72,11 @@ export function Game() {
     this.checkGameOver = function () {
         this.gameOver = snake.isDead();
         if (this.gameOver) {
+            GA.sendScore({
+                score: score.getScore(),
+                ai: game.playAi,
+                crossWalls: grid.crossWalls,
+            });
             score.saveBestScore();
             input.resetDirection();
             // if (!confirm('Play again?')) { return this.stop(); }
