@@ -21,10 +21,14 @@ export function Game() {
     }
 
     this.main = function (currentTime) {
+        const isMaxSpeed = snake.getSpeed() >= snake.maxSpeed;
         this.loop();
-        const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000
-        if (secondsSinceLastRender < 1 / snake.getSpeed()) { return; }
-        this.lastRenderTime = currentTime;
+
+        if (!isMaxSpeed) {
+            const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000
+            if (secondsSinceLastRender < 1 / snake.getSpeed()) { return; }
+            this.lastRenderTime = currentTime;
+        }
 
         this.update();
         this.draw();
