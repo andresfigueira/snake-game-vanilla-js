@@ -5,6 +5,7 @@ export const DOWN_KEY = 'ArrowDown';
 export const LEFT_KEY = 'ArrowLeft';
 export const RIGHT_KEY = 'ArrowRight';
 export const ALL_KEYS = [UP_KEY, DOWN_KEY, LEFT_KEY, RIGHT_KEY];
+export const SPACE_KEY = ' ';
 
 export function Input() {
     this.direction = { ...INITIAL_INPUT_DIRECTION };

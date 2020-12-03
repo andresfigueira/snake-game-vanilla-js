@@ -30,18 +30,24 @@ export function Snake() {
         const getRandomKey = () => ALL_KEYS.filter(k => !badKeys.includes(k))[0] || null;
         const { x, y } = this.currentPosition;
         const foodPos = food.getFood();
-        let key = null;
+        const isCloserX = Math.abs(x - foodPos.x) < Math.abs(y - foodPos.y);
         const nextPossible = {
             [UP_KEY]: { ...this.currentPosition, y: y - BOX },
             [DOWN_KEY]: { ...this.currentPosition, y: y + BOX },
             [LEFT_KEY]: { ...this.currentPosition, x: x - BOX },
             [RIGHT_KEY]: { ...this.currentPosition, x: x + BOX },
         }
+        let key = null;
 
-        if (foodPos.y < y && (blocked || !badKeys.includes(UP_KEY))) { key = UP_KEY; }
-        if (foodPos.y > y && (blocked || !badKeys.includes(DOWN_KEY))) { key = DOWN_KEY; }
-        if (foodPos.x < x && (blocked || !badKeys.includes(LEFT_KEY))) { key = LEFT_KEY; }
-        if (foodPos.x > x && (blocked || !badKeys.includes(RIGHT_KEY))) { key = RIGHT_KEY; }
+        // TODO: Improve
+        // If it's closer X, move Y until it's closer Y
+        if (isCloserX) {
+            if (foodPos.y < y && (blocked || !badKeys.includes(UP_KEY))) { key = UP_KEY; }
+            if (foodPos.y > y && (blocked || !badKeys.includes(DOWN_KEY))) { key = DOWN_KEY; }
+        } else {
+            if (foodPos.x < x && (blocked || !badKeys.includes(LEFT_KEY))) { key = LEFT_KEY; }
+            if (foodPos.x > x && (blocked || !badKeys.includes(RIGHT_KEY))) { key = RIGHT_KEY; }
+        }
         if (!key) { key = getRandomKey(); }
 
         // TODO: Change it to while instead of recursive

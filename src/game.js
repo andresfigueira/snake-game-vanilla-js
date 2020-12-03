@@ -1,6 +1,7 @@
 import { canvas, BOARD_SIZE, ctx, IMMORTAL, PLAY_AI } from './settings.js';
 import { setAttributes } from './utils/HTMLElement.utils.js';
 import { dom, food, input, score, snake } from './app.js';
+import { SPACE_KEY } from './input.js';
 
 export function Game() {
     this.gameOver = false;
@@ -8,6 +9,7 @@ export function Game() {
     this.playAi = PLAY_AI;
     this.immortal = IMMORTAL;
     this.lastRenderTime = 0;
+    this.pause = false;
 
     this.init = () => {
         input.addListener();
@@ -21,6 +23,10 @@ export function Game() {
     }
 
     this.main = function (currentTime) {
+        // TODO: Remove (only for debugging)
+        // if (input.pressedKey === SPACE_KEY) { this.pause = true; }
+        // if (input.pressedKey === '1') { this.pause = false; }
+
         const isMaxSpeed = snake.getSpeed() >= snake.maxSpeed;
         this.loop();
 
@@ -30,6 +36,7 @@ export function Game() {
             this.lastRenderTime = currentTime;
         }
 
+        if (this.pause) { return; }
         this.update();
         this.draw();
         this.checkGameOver();
