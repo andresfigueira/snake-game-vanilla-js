@@ -1,3 +1,4 @@
+import { dom } from './app.js';
 import { INITIAL_SCORE_INCREMENT } from './settings.js';
 
 export function Score() {
@@ -8,6 +9,7 @@ export function Score() {
     }
 
     this.setScore = function (score) {
+        dom.updateScore();
         this.score = score;
     }
 

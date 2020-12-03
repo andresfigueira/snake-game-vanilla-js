@@ -7,11 +7,7 @@ export function Dom() {
         renderActiveAiCheckbox();
         renderCrossWallsCheckbox();
         renderImmortalCheckbox();
-    }
-
-    this.update = function () {
-        updateScore();
-        updateSettings();
+        this.updateScore();
     }
 
     function renderCheckbox(containerId, label, checked = false, onChange = () => { }, props = {}) {
@@ -62,9 +58,16 @@ export function Dom() {
     }
 
     function renderSpeedSlider() {
+        const speedLabel = () => `Speed: ${snake.getSpeed()}`;
         function onChange(event) {
+            function updateSpeedLabel() {
+                const speedLabelEl = document.getElementById('speed-label');
+                speedLabelEl.innerHTML = speedLabel();
+            }
+
             const speed = event.target.value;
             snake.setSpeed(speed);
+            updateSpeedLabel();
         }
 
         const containerEl = document.getElementById('speed-slider-container');
@@ -79,24 +82,17 @@ export function Dom() {
         });
         input.oninput = onChange;
 
-        containerEl.appendChild(input);
-    }
-
-    function updateSettings() {
-        const settingsEl = document.getElementById('settings');
-        const container = document.createElement('div');
-        container.setAttribute('class', 'flex flex-row flex-wrap items-center');
-
         const speed = document.createElement('p');
+        speed.id = 'speed-label';
         speed.className = 'text-lg';
-        speed.innerHTML = `Speed: ${snake.getSpeed()}`;
-        container.appendChild(speed);
+        speed.innerHTML = speedLabel();
 
-        settingsEl.innerHTML = '';
-        settingsEl.appendChild(container);
+        containerEl.innerHTML = '';
+        containerEl.appendChild(input);
+        containerEl.appendChild(speed);
     }
 
-    function updateScore() {
+    this.updateScore = function () {
         const scoreEl = document.getElementById('score');
         const container = document.createElement('div');
 

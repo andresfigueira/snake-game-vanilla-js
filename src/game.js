@@ -21,7 +21,6 @@ export function Game() {
     }
 
     this.main = function (currentTime) {
-        dom.update();
         this.loop();
         const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000
         if (secondsSinceLastRender < 1 / snake.getSpeed()) { return; }
