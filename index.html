@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="src/styles/global.css" />
     <link rel="stylesheet" href="src/styles/canvas.css" />
     <link rel="stylesheet" href="src/styles/header.css" />
+    <link rel="stylesheet" href="src/styles/container.css" />
     <link
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
@@ -21,19 +22,19 @@
           <img alt="GitHub" style="max-height: 24px;" src="assets/images/github.png"></img>
         </a>
       </div>
-      <div class="p-8 flex flex-col items-center">
-        <div class="flex flex-row justify-between" style="width: 600px;">
-          <div id="score" class="mb-8"></div>
-          <div class="flex flex-col">
-            <label class="flex items-center" id="active-ai-container"></label>
-            <label class="flex items-center" id="cross-walls-container"></label>
-            <label class="flex items-center" id="immortal-container"></label>
+      <div class="w-container">
+          <div class="flex flex-row justify-between w-full">
+            <div id="score" class="mb-8"></div>
+            <div class="flex flex-col">
+              <label class="flex items-center" id="active-ai-container"></label>
+              <label class="flex items-center" id="cross-walls-container"></label>
+              <label class="flex items-center" id="immortal-container"></label>
+            </div>
           </div>
-        </div>
-        <canvas id="canvas" class="mb-8"></canvas>
-        <div id="speed-slider-container" class="flex justify-center">
-        </div>
-        <div id="settings"></div>
+          <canvas id="canvas" class="mb-8"></canvas>
+          <div id="speed-slider-container" class="flex items-center justify-center">
+          </div>
+          <div id="settings"></div>
       </div>
     </div>
   </body>

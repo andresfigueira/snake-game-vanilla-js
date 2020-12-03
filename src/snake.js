@@ -13,6 +13,8 @@ export function Snake() {
     this.speed = INITIAL_SNAKE_SPEED;
     this.maxSpeed = MAX_SNAKE_SPEED;
     this.prevPositions = [];
+    this.prevKey = null;
+    this.prevPosition = null;
     this.nextPosition = null;
     this.currentPosition = this.snakeBody[0];
     this.slow = false;
@@ -34,7 +36,6 @@ export function Snake() {
             [DOWN_KEY]: { ...this.currentPosition, y: y + BOX },
             [LEFT_KEY]: { ...this.currentPosition, x: x - BOX },
             [RIGHT_KEY]: { ...this.currentPosition, x: x + BOX },
-            current: { ...this.currentPosition },
         }
 
         if (foodPos.y < y && (blocked || !badKeys.includes(UP_KEY))) { key = UP_KEY; }
@@ -44,6 +45,7 @@ export function Snake() {
         if (!key) { key = getRandomKey(); }
 
         // TODO: Change it to while instead of recursive
+        // TODO: Press only one key by direction
         if (this.isDead(nextPossible[key])) {
             return this.getNextBestPosition([...badKeys, key], !key);
         }
@@ -62,7 +64,8 @@ export function Snake() {
         if (grid.crossWalls && grid.isOutsideUp(nextPos)) { nextPos.y = END_BOARD; }
         if (grid.crossWalls && grid.isOutsideDown(nextPos)) { nextPos.y = START_BOARD; }
 
-        this.prevPositions.push(this.currentPosition);
+        this.prevPosition = this.currentPosition;
+        this.prevPositions.push(this.prevPosition);
         this.currentPosition = nextPos;
         this.snakeBody.pop();
         this.snakeBody.unshift(nextPos);

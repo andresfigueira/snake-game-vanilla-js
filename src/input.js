@@ -8,9 +8,11 @@ export const ALL_KEYS = [UP_KEY, DOWN_KEY, LEFT_KEY, RIGHT_KEY];
 
 export function Input() {
     this.direction = { ...INITIAL_INPUT_DIRECTION };
+    this.pressedKey = null;
 
     this.addListener = () => {
         document.addEventListener('keydown', ({ key }) => {
+            this.pressedKey = key;
             this.setDirectionByKey(key);
         });
     }

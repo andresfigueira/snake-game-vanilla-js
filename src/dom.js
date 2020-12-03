@@ -55,7 +55,7 @@ export function Dom() {
 
     function renderActiveAiCheckbox() {
         const containerId = 'active-ai-container';
-        const label = 'Active AI'
+        const label = 'AI'
         const checked = game.playAi;
         const onChange = (event) => game.setPlayAi(event.target.checked);
         renderCheckbox(containerId, label, checked, onChange);
