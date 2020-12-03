@@ -12,8 +12,8 @@ export const CROSS_WALLS = false;
 // Snake
 export const SNAKE_COLOR = '#0B9ABD';
 export const INITIAL_SNAKE_SPEED = 100;
+export const MAX_SNAKE_SPEED = 500;
 export const INITIAL_SNAKE_SPEED_INCREMENT = 0.25;
-export const MAX_SNAKE_SPEED = 200;
 
 // Game
 export const IMMORTAL = false;
