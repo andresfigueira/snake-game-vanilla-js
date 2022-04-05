@@ -25,6 +25,8 @@ export function Dom() {
 
         containerEl.innerHTML = '';
         containerEl?.appendChild(input);
+        containerEl.style.margin = '1.5rem';
+        containerEl.style.marginTop = '0';
         containerEl?.appendChild(span);
     }
 
