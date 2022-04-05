@@ -5,9 +5,60 @@
     font-family: monospace;
     text-transform: uppercase;
     color: white;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #05172A;
+    background-color: #05172a;
     max-height: 100vh;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.text-yellow-500 {
+    --tw-text-opacity: 1;
+    color: rgba(245,158,11,var(--tw-text-opacity));
+}
+
+.p-8 {
+    padding: 2rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.w-full {
+    width: 100%
+}
+
+.mb-8 {
+    margin-bottom: 2rem;
 }

@@ -79,6 +79,7 @@ export function Dom() {
             value: snake.getSpeed(),
             min: "1",
             max: snake.maxSpeed,
+            'aria-label': "Speed",
         });
         input.oninput = onChange;
 

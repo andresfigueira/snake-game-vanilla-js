@@ -3,31 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Snake game with a twist. The snake can eat the food and grow in length. The game is over when the snake hits the wall or itself."
+    />
     <title>Snake AI game</title>
     <!-- Google Analytics -->
-    <script src="src/services/google-analytics.js" type="module"></script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script defer src="src/services/google-analytics.js" type="module"></script>
+    <script defer async src='https://www.google-analytics.com/analytics.js'></script>
     <!-- End Google Analytics -->
     <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
     <!-- End Firebase -->
     <script src="index.js" defer type="module"></script>
-    <link rel="stylesheet" href="src/styles/global.css" />
-    <link rel="stylesheet" href="src/styles/canvas.css" />
-    <link rel="stylesheet" href="src/styles/header.css" />
-    <link rel="stylesheet" href="src/styles/container.css" />
-    <link
+    <link defer rel="stylesheet" href="src/styles/global.css" />
+    <link defer rel="stylesheet" href="src/styles/canvas.css" />
+    <link defer rel="stylesheet" href="src/styles/header.css" />
+    <link defer rel="stylesheet" href="src/styles/container.css" />
+    <!-- <link
+      defer
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
-    />
+    /> -->
   </head>
   <body>
     <div id="root">
       <div id="header" class="p-8 flex justify-between items-center">
         <p>Snake AI game</p>
         <a title="Snake game - GitHub" href="https://github.com/andresfigueira/snake-game-vanilla-js" target="_blank">
-          <img alt="GitHub" style="max-height: 24px;" src="assets/images/github.png"></img>
+          <img loading="lazy" alt="GitHub" style="max-height: 24px;" src="assets/images/github.webp"></img>
         </a>
       </div>
       <div class="w-container">
